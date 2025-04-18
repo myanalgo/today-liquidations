@@ -1,0 +1,47 @@
+[
+  {
+    "symbol": "TUSDT",
+    "side": "BUY",
+    "type": "LIMIT",
+    "quantity": 69781,
+    "price": 0.02177,
+    "usdtValue": 1519.13237,
+    "timestamp": "2025-04-18T19:39:08.129Z"
+  },
+  {
+    "symbol": "TUSDT",
+    "side": "BUY",
+    "type": "LIMIT",
+    "quantity": 2551,
+    "price": 0.02178,
+    "usdtValue": 55.56078,
+    "timestamp": "2025-04-18T19:39:20.072Z"
+  },
+  {
+    "symbol": "WCTUSDT",
+    "side": "BUY",
+    "type": "LIMIT",
+    "quantity": 190,
+    "price": 0.3419,
+    "usdtValue": 64.961,
+    "timestamp": "2025-04-18T19:39:38.091Z"
+  },
+  {
+    "symbol": "BANKUSDT",
+    "side": "BUY",
+    "type": "LIMIT",
+    "quantity": 1858,
+    "price": 0.054234,
+    "usdtValue": 100.76677199999999,
+    "timestamp": "2025-04-18T19:39:50.074Z"
+  },
+  {
+    "symbol": "BANKUSDT",
+    "side": "BUY",
+    "type": "LIMIT",
+    "quantity": 200,
+    "price": 0.054451,
+    "usdtValue": 10.8902,
+    "timestamp": "2025-04-18T19:39:53.092Z"
+  }
+]
