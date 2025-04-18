@@ -1,0 +1,38 @@
+[
+  {
+    "symbol": "TUSDT",
+    "totalQuantity": 72332,
+    "totalUsdtValue": 1574.69315,
+    "avgPrice": 0.02177035267931206,
+    "count": 2,
+    "lastTimestamp": "2025-04-18T19:39:20.072Z",
+    "sides": {
+      "BUY": 72332,
+      "SELL": 0
+    }
+  },
+  {
+    "symbol": "WCTUSDT",
+    "totalQuantity": 190,
+    "totalUsdtValue": 64.961,
+    "avgPrice": 0.3419,
+    "count": 1,
+    "lastTimestamp": "2025-04-18T19:39:38.091Z",
+    "sides": {
+      "BUY": 190,
+      "SELL": 0
+    }
+  },
+  {
+    "symbol": "BANKUSDT",
+    "totalQuantity": 2058,
+    "totalUsdtValue": 111.656972,
+    "avgPrice": 0.054255088435374146,
+    "count": 2,
+    "lastTimestamp": "2025-04-18T19:39:53.092Z",
+    "sides": {
+      "BUY": 2058,
+      "SELL": 0
+    }
+  }
+]
