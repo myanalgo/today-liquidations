@@ -78,7 +78,7 @@ class Liquidation {
           (event) =>
             event.timestamp instanceof Date &&
             !isNaN(event.timestamp.getTime()) &&
-            now - event.timestamp.getTime() <= 5 * 60 * 1000 // 5 minutes in milliseconds
+            now - event.timestamp.getTime() <= 24 * 60 * 60 * 1000 // 5 minutes in milliseconds
         );
     } catch (err) {
       console.error('❌ Failed to load liquidations from file:', err);
@@ -103,7 +103,7 @@ class Liquidation {
 
   cleanupOldEvents() {
     // Changed to keep only last 5 minutes
-    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+    const fiveMinutesAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
     const initialLength = this.liquidations.length;
     this.liquidations = this.liquidations.filter(
       (event) => event.timestamp >= fiveMinutesAgo
@@ -114,7 +114,7 @@ class Liquidation {
   }
 
   getFiveMinuteLiquidationsSorted(sortBy = 'usdtValue', order = 'desc') {
-    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+    const fiveMinutesAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
     const filtered = this.liquidations.filter(
       (event) => event.timestamp >= fiveMinutesAgo
     );
@@ -127,7 +127,7 @@ class Liquidation {
     options = { saveToFile: true }
   ) {
     // Modified to only use last 5 minutes
-    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+    const fiveMinutesAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
     
     const recentLiquidations = this.liquidations.filter(
       (event) => new Date(event.timestamp) >= fiveMinutesAgo
