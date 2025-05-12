@@ -2,11 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const fs = require('fs').promises;
 const liquidations = require('./src/Liquidation.js');
+const os = require('os'); // Added for dynamic IP detection
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 22223;
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -16,8 +18,8 @@ app.get('/liquidations', async (req, res) => {
   const filePath = './src/liquidations/liquidations.json';
   try {
     const fileExists = await fs.access(filePath)
-    .then(() => true)
-    .catch(() => false);
+      .then(() => true)
+      .catch(() => false);
     if (!fileExists) {
       return res.status(404).json({
         success: false,
@@ -71,6 +73,14 @@ app.use((req, res) => {
   // Run every 5 seconds
   setInterval(run24_7, 5000);
   
-  // Start server
-  app.listen(PORT, () => console.log(`Server is running on http://localhost:${PORT}`));
+  // Dynamically find the 192.168.x.x IP address
+  const interfaces = os.networkInterfaces();
+  const IP = Object.values(interfaces)
+    .flat()
+    .find(i => i.family === 'IPv4' && i.address.startsWith('192.168'))?.address || '0.0.0.0';
+  
+  // Start server with explicit IP and port
+  app.listen(PORT, IP, () => {
+    console.log(`Server is running on http://${IP}:${PORT}`);
+  });
 })();
