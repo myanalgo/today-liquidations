@@ -1,12 +1,18 @@
 const express = require('express');
 const cors = require('cors');
 const fs = require('fs').promises;
+const https = require('https'); // Add HTTPS module
 const liquidations = require('./src/Liquidation.js');
-const os = require('os'); // Added for dynamic IP detection
+const os = require('os');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 22223;
+
+// Load SSL certificate and key
+const privateKey = fs.readFileSync('src/key.pem', 'utf8');
+const certificate = fs.readFileSync('src/cert.pem', 'utf8');
+const credentials = { key: privateKey, cert: certificate };
 
 // Middleware
 app.use(cors());
@@ -79,8 +85,9 @@ app.use((req, res) => {
     .flat()
     .find(i => i.family === 'IPv4' && i.address.startsWith('192.168'))?.address || '0.0.0.0';
   
-  // Start server with explicit IP and port
-  app.listen(PORT, IP, () => {
-    console.log(`Server is running on http://${IP}:${PORT}`);
+  // Start HTTPS server
+  const server = https.createServer(credentials, app);
+  server.listen(PORT, IP, () => {
+    console.log(`Server is running on https://${IP}:${PORT}`);
   });
 })();
