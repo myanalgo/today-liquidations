@@ -1,7 +1,8 @@
 const express = require('express');
 const cors = require('cors');
-const fs = require('fs').promises;
-const https = require('https'); // Add HTTPS module
+const fs = require('fs'); // Use core fs module for readFileSync
+const fsPromises = require('fs').promises; // Keep promises for async operations
+const https = require('https');
 const liquidations = require('./src/Liquidation.js');
 const os = require('os');
 require('dotenv').config();
@@ -23,7 +24,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get('/liquidations', async (req, res) => {
   const filePath = './src/liquidations/liquidations.json';
   try {
-    const fileExists = await fs.access(filePath)
+    const fileExists = await fsPromises.access(filePath)
       .then(() => true)
       .catch(() => false);
     if (!fileExists) {
@@ -32,7 +33,7 @@ app.get('/liquidations', async (req, res) => {
         message: 'No liquidation data available yet',
       });
     }
-    const data = await fs.readFile(filePath, 'utf8');
+    const data = await fsPromises.readFile(filePath, 'utf8');
     const liquidations = JSON.parse(data);
     const consolidated = liquidations.reduce((acc, curr) => {
       const key = `${curr.symbol}-${curr.side}`;
